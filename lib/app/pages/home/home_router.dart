@@ -3,6 +3,8 @@ import 'package:dw9_delivery_app/app/repositories/products/products_repository_i
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'home_page.dart';
+
 class HomeRouter {
   HomeRouter._();
 
@@ -14,5 +16,6 @@ class HomeRouter {
             ),
           ),
         ],
+        child: const HomePage(),
       );
 }
