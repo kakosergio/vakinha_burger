@@ -8,11 +8,24 @@ mixin Messages<T extends StatefulWidget> on State<T> {
       Overlay.of(context),
       CustomSnackBar.error(
         message: message,
-        backgroundColor: Colors.red,
       ),
     );
   }
 
-  void showInfo() {}
-  void showSuccess() {}
+  void showInfo(String message) {
+    showTopSnackBar(
+      Overlay.of(context),
+      CustomSnackBar.info(
+        message: message,
+      ),
+    );
+  }
+  void showSuccess(String message) {
+    showTopSnackBar(
+      Overlay.of(context),
+      CustomSnackBar.success(
+        message: message,
+      ),
+    );
+  }
 }

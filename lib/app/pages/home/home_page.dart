@@ -22,6 +22,10 @@ class _HomePageState extends State<HomePage> with Loader, Messages {
         // await Future.delayed(const Duration(seconds: 2));
         // hideLoader();
         showError('Teste');
+        await Future.delayed(const Duration(seconds: 2));
+        showInfo('teste2');
+        await Future.delayed(const Duration(seconds: 2));
+        showSuccess('Teste3');
       }),
       appBar: DeliveryAppBar(),
       body: Column(
