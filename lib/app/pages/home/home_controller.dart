@@ -9,6 +9,15 @@ class HomeController extends Cubit<HomeState> {
   HomeController(this._productsRepository) : super(const HomeState.initial());
 
   Future<void> loadProducts() async {
-    
+    emit(state.copyWith(status: HomeStateStatus.loading));
+    try {
+      final products = await _productsRepository.findAllProducts();
+      emit(
+        state.copyWith(
+          status: HomeStateStatus.ready,
+          products: products,
+        ),
+      );
+    } catch (e) {}
   }
 }
