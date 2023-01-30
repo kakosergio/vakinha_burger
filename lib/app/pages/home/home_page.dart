@@ -1,6 +1,4 @@
 import 'package:dw9_delivery_app/app/core/ui/base_state/base_state.dart';
-import 'package:dw9_delivery_app/app/core/ui/helpers/loader.dart';
-import 'package:dw9_delivery_app/app/core/ui/helpers/messages.dart';
 import 'package:dw9_delivery_app/app/pages/home/home_controller.dart';
 import 'package:dw9_delivery_app/app/pages/home/widgets/delivery_product_tile.dart';
 import 'package:flutter/material.dart';
