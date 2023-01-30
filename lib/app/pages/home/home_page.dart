@@ -4,7 +4,6 @@ import 'package:dw9_delivery_app/app/pages/home/home_controller.dart';
 import 'package:dw9_delivery_app/app/pages/home/widgets/delivery_product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../core/ui/widgets/delivery_app_bar.dart';
 import 'home_state.dart';
 
@@ -30,8 +29,20 @@ class _HomePageState extends State<HomePage> with Loader, Messages {
       appBar: DeliveryAppBar(),
       body: BlocConsumer<HomeController, HomeState>(
         listener: (context, state) {
-          // TODO: implement listener
+          state.status.matchAny(
+            any: hideLoader,
+            loading: showLoader,
+            error: () {
+              hideLoader();
+              showError(state.errorMessage ?? 'Erro não informado.');
+            },
+          );
         },
+        buildWhen: (previous, current) => current.status.matchAny(
+          any: () => false,
+          initial: () => true,
+          ready: () => true,
+        ),
         builder: (context, state) {
           return Column(
             children: [

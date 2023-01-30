@@ -10,7 +10,8 @@ extension HomeStateStatusMatch on HomeStateStatus {
   T match<T>(
       {required T Function() initial,
       required T Function() loading,
-      required T Function() ready}) {
+      required T Function() ready,
+      required T Function() error}) {
     final v = this;
     if (v == HomeStateStatus.initial) {
       return initial();
@@ -24,6 +25,10 @@ extension HomeStateStatusMatch on HomeStateStatus {
       return ready();
     }
 
+    if (v == HomeStateStatus.error) {
+      return error();
+    }
+
     throw Exception('HomeStateStatus.match failed, found no match for: $this');
   }
 
@@ -31,7 +36,8 @@ extension HomeStateStatusMatch on HomeStateStatus {
       {required T Function() any,
       T Function()? initial,
       T Function()? loading,
-      T Function()? ready}) {
+      T Function()? ready,
+      T Function()? error}) {
     final v = this;
     if (v == HomeStateStatus.initial && initial != null) {
       return initial();
@@ -43,6 +49,10 @@ extension HomeStateStatusMatch on HomeStateStatus {
 
     if (v == HomeStateStatus.ready && ready != null) {
       return ready();
+    }
+
+    if (v == HomeStateStatus.error && error != null) {
+      return error();
     }
 
     return any();
