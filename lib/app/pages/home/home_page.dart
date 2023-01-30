@@ -1,10 +1,12 @@
 import 'package:dw9_delivery_app/app/core/ui/helpers/loader.dart';
 import 'package:dw9_delivery_app/app/core/ui/helpers/messages.dart';
-import 'package:dw9_delivery_app/app/models/product_model.dart';
+import 'package:dw9_delivery_app/app/pages/home/home_controller.dart';
 import 'package:dw9_delivery_app/app/pages/home/widgets/delivery_product_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/ui/widgets/delivery_app_bar.dart';
+import 'home_state.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,35 +17,35 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with Loader, Messages {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<HomeController>().loadProducts();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () async {
-        // showLoader();
-        // await Future.delayed(const Duration(seconds: 2));
-        // hideLoader();
-        showError('Teste');
-        await Future.delayed(const Duration(seconds: 2));
-        showInfo('teste2');
-        await Future.delayed(const Duration(seconds: 2));
-        showSuccess('Teste3');
-      }),
       appBar: DeliveryAppBar(),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) => DeliveryProductTile(
-                  product: ProductModel(
-                      id: 1,
-                      name: 'Lanchinho',
-                      description: 'Feio mas gostoso',
-                      price: 15,
-                      image:
-                          'https://assets.unileversolutions.com/recipes-v2/106684.jpg?imwidth=800')),
-            ),
-          )
-        ],
+      body: BlocConsumer<HomeController, HomeState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                    itemCount: state.products.length,
+                    itemBuilder: (context, index) {
+                      final product = state.products[index];
+                      return DeliveryProductTile(product: product);
+                    }),
+              )
+            ],
+          );
+        },
       ),
     );
   }

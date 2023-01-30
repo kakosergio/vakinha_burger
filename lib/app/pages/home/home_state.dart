@@ -1,7 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 import 'package:dw9_delivery_app/app/models/product_model.dart';
+import 'package:match/match.dart';
 
+part 'home_state.g.dart';
+
+@match
 enum HomeStateStatus {
   initial,
   loading,
