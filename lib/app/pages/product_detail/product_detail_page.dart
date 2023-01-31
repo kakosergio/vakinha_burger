@@ -11,6 +11,7 @@ import 'package:dw9_delivery_app/app/pages/product_detail/product_detail_control
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/ui/base_state/base_state.dart';
+import '../../dto/order_product_dto.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({
@@ -77,10 +78,10 @@ class _ProductDetailPageState
                 child: BlocBuilder<ProductDetailController, int>(
                   builder: (context, amount) {
                     return DeliveryIncrementDecrementButton(
-                                  amount: amount,
-                                  decrementTap: controller.decrement,
-                                  incrementTap: controller.increment,
-                                );
+                      amount: amount,
+                      decrementTap: controller.decrement,
+                      incrementTap: controller.increment,
+                    );
                   },
                 ),
               ),
@@ -91,7 +92,12 @@ class _ProductDetailPageState
                 child: BlocBuilder<ProductDetailController, int>(
                   builder: (context, amount) {
                     return ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Navigator.of(context).pop(
+                        OrderProductDto(
+                          product: widget.product,
+                          amount: amount,
+                        ),
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -105,20 +111,17 @@ class _ProductDetailPageState
                           ),
                           //! Notei que o AutoSizeText quebra o MainAxisAlignment.spaceBetween.
                           //! Estou retornando para um Text comum por esse motivo, até encontrar um fix
+                          //? O fix foi colocar um textAlign pra end.
                           Expanded(
                             child: AutoSizeText(
-                                (widget.product.price * amount).currencyPTBR,
-                                maxFontSize: 13,
-                                minFontSize: 5,
-                                maxLines: 1,
-                                style: context.textStyles.textExtraBold,
-                                textAlign: TextAlign.end,
-                              ),
+                              (widget.product.price * amount).currencyPTBR,
+                              maxFontSize: 13,
+                              minFontSize: 5,
+                              maxLines: 1,
+                              style: context.textStyles.textExtraBold,
+                              textAlign: TextAlign.end,
+                            ),
                           ),
-                          // Text(
-                          //   (widget.product.price * amount).currencyPTBR,
-                          //   style: context.textStyles.textExtraBold,
-                          // ),
                         ],
                       ),
                     );

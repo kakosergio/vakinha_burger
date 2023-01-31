@@ -1,8 +1,12 @@
 import 'package:dw9_delivery_app/app/core/extensions/formatter_extension.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/colors_app.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
+import 'package:dw9_delivery_app/app/dto/order_product_dto.dart';
 import 'package:dw9_delivery_app/app/models/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../home_controller.dart';
 
 class DeliveryProductTile extends StatelessWidget {
   final ProductModel product;
@@ -12,10 +16,15 @@ class DeliveryProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async =>
-        await Navigator.of(context).pushNamed('/productDetail', arguments: {
-          'product': product
-        }),
+      onTap: () async {
+        final controller = context.read<HomeController>();
+        final orderProduct = await Navigator.of(context)
+            .pushNamed('/productDetail', arguments: {'product': product});
+
+        if (orderProduct != null) {
+          controller.addOrUpdateCart(orderProduct as OrderProductDto);
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
