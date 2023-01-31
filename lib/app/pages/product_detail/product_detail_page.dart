@@ -58,7 +58,11 @@ class ProductDetailPage extends StatelessWidget {
                 height: 68,
                 padding: const EdgeInsets.all(8),
                 width: context.percentWidth(.5),
-                child: const DeliveryIncrementDecrementButton(),
+                child: DeliveryIncrementDecrementButton(
+                  amount: 1,
+                  decrementTap: () {},
+                  incrementTap: () {},
+                ),
               ),
               Container(
                 width: context.percentWidth(.5),
@@ -88,7 +92,10 @@ class ProductDetailPage extends StatelessWidget {
                       //       style: context.textStyles.textExtraBold
                       //     ),
                       // ),
-                      Text(r'R$ 6,99', style: context.textStyles.textExtraBold,)
+                      Text(
+                        r'R$ 6,99',
+                        style: context.textStyles.textExtraBold,
+                      )
                     ],
                   ),
                 ),
