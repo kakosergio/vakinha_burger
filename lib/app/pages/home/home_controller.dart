@@ -30,8 +30,26 @@ class HomeController extends Cubit<HomeState> {
   }
 
   void addOrUpdateCart(OrderProductDto orderProduct) {
+    // copia a lista e cria uma nova usando o destruction
     final shoppingCart = [...state.shoppingCart];
-    shoppingCart.add(orderProduct);
+
+    // procura no shoppingCart se tem um index com aquele produto
+    final orderIndex = state.shoppingCart
+        .indexWhere((orderP) => orderP.product == orderProduct.product);
+
+    // se tiver, atualiza as informações com o produto novo
+    if (orderIndex != -1) {
+      // se a quantidade for reduzida a zero, remove do carrinho
+      if (orderProduct.amount == 0) {
+        shoppingCart.removeAt(orderIndex);
+      } else {
+        shoppingCart[orderIndex] = orderProduct;
+      }
+    } else {
+      // se não, adiciona o produto
+      shoppingCart.add(orderProduct);
+    }
+    // emite o estado
     emit(state.copyWith(shoppingCart: shoppingCart));
   }
 }

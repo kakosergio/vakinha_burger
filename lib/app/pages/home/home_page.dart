@@ -1,6 +1,7 @@
 import 'package:dw9_delivery_app/app/core/ui/base_state/base_state.dart';
 import 'package:dw9_delivery_app/app/pages/home/home_controller.dart';
 import 'package:dw9_delivery_app/app/pages/home/widgets/delivery_product_tile.dart';
+import 'package:dw9_delivery_app/app/pages/home/widgets/shopping_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/ui/widgets/delivery_app_bar.dart';
@@ -55,7 +56,13 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                         orderProduct: orders.isNotEmpty ? orders.first : null,
                       );
                     }),
-              )
+              ),
+              Visibility(
+                visible: state.shoppingCart.isNotEmpty,
+                child: ShoppingCart(
+                  cart: state.shoppingCart,
+                ),
+              ),
             ],
           );
         },
