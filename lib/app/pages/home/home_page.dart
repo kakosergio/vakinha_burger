@@ -40,9 +40,11 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
           initial: () => true,
           ready: () => true,
         ),
+        
         builder: (context, state) {
           return Column(
             children: [
+              Text('${state.shoppingCart.length}'),
               Expanded(
                 child: ListView.builder(
                     itemCount: state.products.length,
