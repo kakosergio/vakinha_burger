@@ -1,24 +1,26 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dw9_delivery_app/app/core/extensions/formatter_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:dw9_delivery_app/app/core/extensions/formatter_extension.dart';
 import 'package:dw9_delivery_app/app/core/ui/helpers/size_extensions.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
 import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_app_bar.dart';
 import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_increment_decrement_button.dart';
 import 'package:dw9_delivery_app/app/models/product_model.dart';
 import 'package:dw9_delivery_app/app/pages/product_detail/product_detail_controller.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/ui/base_state/base_state.dart';
 import '../../dto/order_product_dto.dart';
 
 class ProductDetailPage extends StatefulWidget {
+  final ProductModel product;
+  final OrderProductDto? order;
   const ProductDetailPage({
     Key? key,
     required this.product,
+    this.order,
   }) : super(key: key);
-  final ProductModel product;
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -26,6 +28,14 @@ class ProductDetailPage extends StatefulWidget {
 
 class _ProductDetailPageState
     extends BaseState<ProductDetailPage, ProductDetailController> {
+      
+  @override
+  void initState() {
+    super.initState();
+    final amount = widget.order?.amount ?? 1;
+    controller.initial(amount, widget.order != null);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
