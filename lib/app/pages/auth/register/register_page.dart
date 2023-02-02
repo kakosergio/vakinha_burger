@@ -1,7 +1,11 @@
+import 'package:dw9_delivery_app/app/core/ui/base_state/base_state.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
 import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_app_bar.dart';
 import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_button.dart';
+import 'package:dw9_delivery_app/app/pages/auth/register/register_controller.dart';
+import 'package:dw9_delivery_app/app/pages/auth/register/register_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:validatorless/validatorless.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -11,28 +15,44 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends BaseState<RegisterPage, RegisterController> {
   final _nameEC = TextEditingController();
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
-  void initState() {
+  void dispose() {
+    super.dispose();
     _nameEC.dispose();
     _emailEC.dispose();
     _passwordEC.dispose();
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: DeliveryAppBar(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Form(
+    return BlocListener<RegisterController, RegisterState>(
+      listener: (context, state) {
+        state.status.matchAny(
+          any: hideLoader,
+          register: showLoader,
+          error: () {
+            hideLoader();
+            showError('Erro ao registrar usuário.');
+          },
+          success: () {
+            hideLoader();
+            showSuccess('Cadastro realizado com sucesso');
+            Navigator.pop(context);
+          },
+        );
+      },
+      child: Scaffold(
+        appBar: DeliveryAppBar(),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,19 +121,23 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   Center(
                     child: DeliveryButton(
-                        width: double.infinity,
-                        label: 'CADASTRAR',
-                        onPressed: () {
-                          final valid = _formKey.currentState?.validate() ?? false;
+                      width: double.infinity,
+                      label: 'CADASTRAR',
+                      onPressed: () {
+                        final valid =
+                            _formKey.currentState?.validate() ?? false;
 
-                          if (valid){
-                            
-                          }
-
-                        }),
-                  )
+                        if (valid) {
+                          controller.register(
+                              _nameEC.text, _emailEC.text, _passwordEC.text);
+                        }
+                      },
+                    ),
+                  ),
                 ],
-              )),
+              ),
+            ),
+          ),
         ),
       ),
     );
