@@ -19,7 +19,7 @@ class ShoppingCart extends StatelessWidget {
     if (!sp.containsKey('accessToken')) {
       //Envio para o login
       final loginResult = await navigator.pushNamed('/auth/login');
-
+      
     }
 
     // Envio para o Order
