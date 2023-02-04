@@ -1,7 +1,9 @@
 import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
 import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_app_bar.dart';
+import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_button.dart';
 import 'package:dw9_delivery_app/app/pages/order/widgets/order_field.dart';
 import 'package:dw9_delivery_app/app/pages/order/widgets/order_product_tile.dart';
+import 'package:dw9_delivery_app/app/pages/order/widgets/payment_types_field.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -96,9 +98,29 @@ class OrderPage extends StatelessWidget {
                   validator: Validatorless.required('m'),
                   hintText: 'Digite o CPF',
                 ),
+                const PaymentTypesField(),
               ],
             ),
           ),
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              children: [
+                const Divider(
+                  color: Colors.grey,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: DeliveryButton(
+                    width: double.infinity,
+                    height: 48,
+                    label: 'FINALIZAR',
+                    onPressed: () {},
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
