@@ -41,42 +41,42 @@ class OrderPage extends StatelessWidget {
               (context, index) => Column(
                 children: [
                   OrderProductTile(
-                    index: 1,
+                    index: index,
                     orderProduct: OrderProductDto(
                       amount: 10,
                       product: ProductModel.fromMap({}),
                     ),
                   ),
                   const Divider(color: Colors.grey),
-                  SliverToBoxAdapter(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Total do pedido',
-                                style: context.textStyles.textExtraBold
-                                    .copyWith(fontSize: 16),
-                              ),
-                              Text(
-                                r'R$ 200,00',
-                                style: context.textStyles.textExtraBold
-                                    .copyWith(fontSize: 20),
-                              )
-                            ],
-                          ),
-                        ),
-                        const Divider(
-                          color: Colors.grey,
-                        ),
-                      ],
-                    ),
-                  )
                 ],
               ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Total do pedido',
+                        style: context.textStyles.textExtraBold
+                            .copyWith(fontSize: 16),
+                      ),
+                      Text(
+                        r'R$ 200,00',
+                        style: context.textStyles.textExtraBold
+                            .copyWith(fontSize: 20),
+                      )
+                    ],
+                  ),
+                ),
+                const Divider(
+                  color: Colors.grey,
+                ),
+              ],
             ),
           ),
         ],
