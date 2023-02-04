@@ -1,7 +1,9 @@
 import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
 import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_app_bar.dart';
+import 'package:dw9_delivery_app/app/pages/order/widgets/order_field.dart';
 import 'package:dw9_delivery_app/app/pages/order/widgets/order_product_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:validatorless/validatorless.dart';
 
 import '../../dto/order_product_dto.dart';
 import '../../models/product_model.dart';
@@ -75,6 +77,24 @@ class OrderPage extends StatelessWidget {
                 ),
                 const Divider(
                   color: Colors.grey,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                OrderField(
+                  title: 'Endereço de entrega',
+                  controller: TextEditingController(text: 'x'),
+                  validator: Validatorless.required('m'),
+                  hintText: 'Digite o endereço',
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                OrderField(
+                  title: 'CPF',
+                  controller: TextEditingController(text: 'x'),
+                  validator: Validatorless.required('m'),
+                  hintText: 'Digite o CPF',
                 ),
               ],
             ),
