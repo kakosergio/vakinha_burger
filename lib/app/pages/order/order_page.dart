@@ -1,6 +1,8 @@
+import 'package:dw9_delivery_app/app/core/ui/base_state/base_state.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
 import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_app_bar.dart';
 import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_button.dart';
+import 'package:dw9_delivery_app/app/pages/order/order_controller.dart';
 import 'package:dw9_delivery_app/app/pages/order/widgets/order_field.dart';
 import 'package:dw9_delivery_app/app/pages/order/widgets/order_product_tile.dart';
 import 'package:dw9_delivery_app/app/pages/order/widgets/payment_types_field.dart';
@@ -10,9 +12,14 @@ import 'package:validatorless/validatorless.dart';
 import '../../dto/order_product_dto.dart';
 import '../../models/product_model.dart';
 
-class OrderPage extends StatelessWidget {
+class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
 
+  @override
+  State<OrderPage> createState() => _OrderPageState();
+}
+
+class _OrderPageState extends BaseState<OrderPage, OrderController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
