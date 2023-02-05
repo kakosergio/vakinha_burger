@@ -1,3 +1,4 @@
+import 'package:dw9_delivery_app/app/core/extensions/formatter_extension.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/colors_app.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +19,13 @@ class OrderProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final product = orderProduct.product;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
         children: [
           Image.network(
-            'https://assets.unileversolutions.com/recipes-v2/106684.jpg?imwidth=800',
+            product.image,
             width: 100,
             height: 100,
             fit: BoxFit.cover,
@@ -35,19 +37,20 @@ class OrderProductTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'X-burger',
-                    style: context.textStyles.textRegular.copyWith(fontSize: 16),
+                    product.name,
+                    style:
+                        context.textStyles.textRegular.copyWith(fontSize: 16),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        r'R$ 19,90',
+                        (product.price * orderProduct.amount).currencyPTBR,
                         style: context.textStyles.textMedium.copyWith(
                             color: context.colors.secondary, fontSize: 14),
                       ),
                       DeliveryIncrementDecrementButton.compact(
-                        amount: 1,
+                        amount: orderProduct.amount,
                         incrementTap: () {},
                         decrementTap: () {},
                       )

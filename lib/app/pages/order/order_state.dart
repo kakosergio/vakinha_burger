@@ -26,4 +26,14 @@ class OrderState extends Equatable {
 
   @override
   List<Object?> get props => [];
+
+  OrderState copyWith({
+    OrderStatus? status,
+    List<OrderProductDto>? orderProducts,
+  }) {
+    return OrderState(
+      status: status ?? this.status,
+      orderProducts: orderProducts ?? this.orderProducts,
+    );
+  }
 }
