@@ -133,9 +133,15 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                       height: 10,
                     ),
                     OrderField(
+                      cpf: true,
                       title: 'CPF',
                       controller: _documentEC,
-                      validator: Validatorless.required('CPF obrigatório'),
+                      validator: Validatorless.multiple(
+                        [
+                          Validatorless.required('CPF obrigatório'),
+                          Validatorless.cpf('CPF inválido'),
+                        ],
+                      ),
                       hintText: 'Digite o CPF',
                     ),
                     const SizedBox(
@@ -178,10 +184,9 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                           final valid =
                               _formKey.currentState?.validate() ?? false;
                           final paymentTypeSelected = paymentTypeId != null;
-                            paymentTypeValid.value = paymentTypeSelected;
+                          paymentTypeValid.value = paymentTypeSelected;
 
-                          if (valid) {
-                          }
+                          if (valid) {}
                         },
                       ),
                     )

@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 class OrderField extends StatelessWidget {
   final String title;
   final TextEditingController controller;
-  final FormFieldValidator validator;
+  final FormFieldValidator<String?> validator;
   final String hintText;
+  final bool? cpf;
 
-  const OrderField({
-    super.key,
-    required this.title,
-    required this.controller,
-    required this.validator,
-    required this.hintText,
-  });
+  const OrderField(
+      {super.key,
+      required this.title,
+      required this.controller,
+      required this.validator,
+      required this.hintText,
+      this.cpf});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,7 @@ class OrderField extends StatelessWidget {
             height: 35,
           ),
           TextFormField(
+            keyboardType: cpf ?? false ? TextInputType.number : null,
             controller: controller,
             validator: validator,
             decoration: InputDecoration(
