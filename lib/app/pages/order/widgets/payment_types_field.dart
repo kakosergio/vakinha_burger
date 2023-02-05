@@ -1,10 +1,17 @@
-import 'package:dw9_delivery_app/app/core/ui/helpers/size_extensions.dart';
-import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_awesome_select/flutter_awesome_select.dart';
 
+import 'package:dw9_delivery_app/app/core/ui/helpers/size_extensions.dart';
+import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
+
+import '../../../models/payment_types_model.dart';
+
 class PaymentTypesField extends StatelessWidget {
-  const PaymentTypesField({super.key});
+  final List<PaymentTypesModel> paymentTypes;
+  const PaymentTypesField({
+    super.key,
+    required this.paymentTypes,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +54,12 @@ class PaymentTypesField extends StatelessWidget {
               );
             },
             choiceItems: S2Choice.listFrom<String, Map<String, String>>(
-              source: [
-                {'value': 'VA', 'title': 'Vale Alimentação'},
-                {'value': 'VR', 'title': 'Vale Refeição'},
-                {'value': 'CC', 'title': 'Cartão de Crédito'},
-              ],
+              source: paymentTypes
+                  .map((e) => {
+                        'value': '${e.id}',
+                        'title': e.name,
+                      })
+                  .toList(),
               title: (index, item) => item['title'] ?? '',
               value: (index, item) => item['value'] ?? '',
               group: (index, item) => 'Selecione uma forma de pagamento',
