@@ -8,10 +8,16 @@ import '../../../models/payment_types_model.dart';
 
 class PaymentTypesField extends StatelessWidget {
   final List<PaymentTypesModel> paymentTypes;
+  final ValueChanged<int> valueChanged;
+  final bool valid;
+  final String valueSelected;
   const PaymentTypesField({
-    super.key,
+    Key? key,
     required this.paymentTypes,
-  });
+    required this.valueChanged,
+    required this.valid,
+    required this.valueSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +30,13 @@ class PaymentTypesField extends StatelessWidget {
             'Formas de pagamento',
             style: context.textStyles.textRegular.copyWith(fontSize: 16),
           ),
-          SmartSelect.single(
+          SmartSelect<String>.single(
             title: '',
-            selectedValue: '',
+            selectedValue: valueSelected,
             modalType: S2ModalType.bottomSheet,
-            onChange: (value) {},
+            onChange: (selected) {
+              valueChanged(int.parse(selected.value));
+            },
             tileBuilder: (context, state) {
               return InkWell(
                 onTap: state.showModal,
@@ -47,6 +55,23 @@ class PaymentTypesField extends StatelessWidget {
                           ),
                           const Icon(Icons.arrow_forward_ios_rounded)
                         ],
+                      ),
+                    ),
+                    Visibility(
+                      visible: !valid,
+                      child: const Divider(
+                        color: Colors.red,
+                      ),
+                    ),
+                    Visibility(
+                      visible: !valid,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Text(
+                          'Selecione uma forma de pagamento',
+                          style: context.textStyles.textRegular
+                              .copyWith(fontSize: 13, color: Colors.red),
+                        ),
                       ),
                     ),
                   ],
