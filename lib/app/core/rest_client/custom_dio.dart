@@ -16,6 +16,7 @@ class CustomDio extends DioForNative {
       requestBody: true,
       responseBody: true,
       requestHeader: true,
+      responseHeader: true,
     ));
     _authInterceptor = AuthInterceptor();
   }
