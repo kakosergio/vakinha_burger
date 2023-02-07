@@ -29,5 +29,9 @@ class OrderController extends Cubit<OrderState> {
     final order = orders[index];
 
     orders[index] = order.copyWith(amount: order.amount + 1);
+    emit(state.copyWith(
+      status: OrderStatus.updateOrder,
+      orderProducts: orders,
+    ));
   }
 }
