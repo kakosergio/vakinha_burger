@@ -34,4 +34,22 @@ class OrderController extends Cubit<OrderState> {
       orderProducts: orders,
     ));
   }
+
+  void decrementProduct(int index) {
+    final orders = [...state.orderProducts];
+    final order = orders[index];
+    final amount = order.amount;
+
+    if (amount == 1) {
+      // analisar a exclusão do produto
+    } else {
+      orders[index] = order.copyWith(amount: order.amount - 1);
+    }
+
+    orders[index] = order.copyWith(amount: order.amount + 1);
+    emit(state.copyWith(
+      status: OrderStatus.updateOrder,
+      orderProducts: orders,
+    ));
+  }
 }
