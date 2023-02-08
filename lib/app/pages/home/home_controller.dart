@@ -52,4 +52,6 @@ class HomeController extends Cubit<HomeState> {
     // emite o estado
     emit(state.copyWith(shoppingCart: shoppingCart));
   }
+
+  void updateCart(List<OrderProductDto> updateCart) {}
 }

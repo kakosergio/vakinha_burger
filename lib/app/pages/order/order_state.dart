@@ -36,7 +36,8 @@ class OrderState extends Equatable {
         errorMessage = null;
 
   @override
-  List<Object?> get props => [status, orderProducts, paymentTypes, errorMessage];
+  List<Object?> get props =>
+      [status, orderProducts, paymentTypes, errorMessage];
 
   OrderState copyWith({
     OrderStatus? status,
@@ -51,4 +52,7 @@ class OrderState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
+
+  double get totalOrder =>
+      orderProducts.fold(0, (total, product) => total + product.totalPrice);
 }

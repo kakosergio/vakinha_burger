@@ -1,7 +1,9 @@
 import 'package:dw9_delivery_app/app/core/extensions/formatter_extension.dart';
 import 'package:dw9_delivery_app/app/core/ui/helpers/size_extensions.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
+import 'package:dw9_delivery_app/app/pages/home/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../dto/order_product_dto.dart';
@@ -15,6 +17,7 @@ class ShoppingCart extends StatelessWidget {
 
   Future<void> _goOrder(BuildContext context) async {
     final navigator = Navigator.of(context);
+    final controller = context.read<HomeController>();
     final sp = await SharedPreferences.getInstance();
     if (!sp.containsKey('accessToken')) {
       //Envio para o login
@@ -25,7 +28,8 @@ class ShoppingCart extends StatelessWidget {
       }
     }
     // Envio para o Order
-    await navigator.pushNamed('/order', arguments: cart);
+    final updateCart = await navigator.pushNamed('/order', arguments: cart);
+    controller.updateCart(updateCart as List<OrderProductDto>);
   }
 
   @override
