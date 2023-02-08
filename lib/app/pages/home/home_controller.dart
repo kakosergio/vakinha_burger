@@ -53,5 +53,5 @@ class HomeController extends Cubit<HomeState> {
     emit(state.copyWith(shoppingCart: shoppingCart));
   }
 
-  void updateCart(List<OrderProductDto> updateCart) {}
+  void updateCart(List<OrderProductDto> updateCart) => emit(state.copyWith(shoppingCart: updateCart));
 }
