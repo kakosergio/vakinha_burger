@@ -54,10 +54,14 @@ class OrderProductTile extends StatelessWidget {
                       DeliveryIncrementDecrementButton.compact(
                         amount: orderProduct.amount,
                         incrementTap: () {
-                          context.read<OrderController>().incrementProduct(index);
+                          context
+                              .read<OrderController>()
+                              .incrementProduct(index);
                         },
                         decrementTap: () {
-                          
+                          context
+                              .read<OrderController>()
+                              .decrementProduct(index);
                         },
                       )
                     ],
