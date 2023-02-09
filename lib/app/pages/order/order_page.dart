@@ -3,6 +3,7 @@ import 'package:dw9_delivery_app/app/core/ui/base_state/base_state.dart';
 import 'package:dw9_delivery_app/app/core/ui/styles/text_styles.dart';
 import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_app_bar.dart';
 import 'package:dw9_delivery_app/app/core/ui/widgets/delivery_button.dart';
+import 'package:dw9_delivery_app/app/dto/order_dto.dart';
 import 'package:dw9_delivery_app/app/models/payment_types_model.dart';
 import 'package:dw9_delivery_app/app/pages/order/order_controller.dart';
 import 'package:dw9_delivery_app/app/pages/order/widgets/order_field.dart';
@@ -92,6 +93,10 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
             showInfo(
                 'Seu carrinho está vazio. Por favor selecione um produto para realizar seu pedido');
             Navigator.pop(context, <OrderProductDto>[]);
+          },
+          success: () {
+            hideLoader();
+            Navigator.of(context).popAndPushNamed('/order/completed', result: <OrderProductDto>[]);
           },
         );
       },
@@ -245,7 +250,13 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                             final paymentTypeSelected = paymentTypeId != null;
                             paymentTypeValid.value = paymentTypeSelected;
 
-                            if (valid) {}
+                            if (valid && paymentTypeSelected) {
+                              controller.saveOrder(
+                                address: _addressEC.text,
+                                document: _documentEC.text,
+                                paymentMethodId: paymentTypeId!,
+                              );
+                            }
                           },
                         ),
                       )
