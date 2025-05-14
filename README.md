@@ -80,7 +80,7 @@ The app includes several core features:
 
 Developing Vakinha Burger was a great hands-on experience with:
 
-- Firebase Authentication and Firestore
+- API Authentication with implementation of Auth Token and Refresh Token
 - Advanced Flutter state management using **Cubit/Bloc**
 - Clean architecture patterns
 - Asynchronous programming and data flow control
