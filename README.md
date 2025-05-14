@@ -4,13 +4,13 @@
 
 ## 📋 Topics
 
-- [About 📖](#about-)
-- [Preview 📱](#preview-)
-- [Functionalities 🛠️](#functionalities-)
-- [Challenges and Learnings along the way 🤯](#challenges-and-learnings-along-the-way-)
-- [How to Use 🤔](#how-to-use-)
-- [How to Contribute 💪](#how-to-contribute-)
-- [License 📝](#license-)
+- [About 📖](#about)
+- [Preview 📱](#preview)
+- [Functionalities 🛠️](#functionalities)
+- [Challenges and Learnings along the way 🤯](#challenges-and-learnings-along-the-way)
+- [How to Use 🤔](#how-to-use)
+- [How to Contribute 💪](#how-to-contribute)
+- [License 📝](#license)
 
 ---
 
