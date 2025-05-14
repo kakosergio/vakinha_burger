@@ -16,9 +16,9 @@
 
 ## 📖 About
 
-**Vakinha Burger** is a food delivery app focused on restaurant orders, built with **Flutter 💙** and **Firebase 💛**.
+**Vakinha Burger** is a food delivery app focused on restaurant orders, built with **Flutter 💙**.
 
-It was created as a real-world project to simulate a modern burger ordering experience, with cart features, user accounts, and order tracking — and served as a great opportunity to deepen my knowledge in Flutter and Firebase integrations.
+It was created as a real-world project to simulate a modern burger ordering experience, with cart features, user accounts, and order tracking — and served as a great opportunity to deepen my knowledge in Flutter and API integrations.
 
 The idea is simple: offer a smooth and practical ordering flow, both for users and restaurants.  
 You could easily adapt it as a base for an MVP or a production app for local businesses. 🍟🍔
@@ -30,9 +30,6 @@ You could easily adapt it as a base for an MVP or a production app for local bus
 Here are some screenshots of the app in action:  
 
 🧐 _Screenshots coming soon..._  
-📂 You can also find demo images in the `/demos` folder.  
-
-> Want to test it? Download the APK [here](#) *(link optional)*
 
 ---
 
@@ -77,12 +74,6 @@ The app includes several core features:
 - Clean and responsive interface
 - Organized navigation with bottom navigation bar and routing
 
-### 🔜 Coming soon...
-
-- Admin dashboard (for restaurants)
-- Discount coupons
-- Payment integration (Pix, Credit Card, etc.)
-
 ---
 
 ## 🤯 Challenges and Learnings along the way
@@ -94,7 +85,6 @@ Developing Vakinha Burger was a great hands-on experience with:
 - Clean architecture patterns
 - Asynchronous programming and data flow control
 - Building dynamic UIs based on state changes
-- Real-time order tracking with Firebase updates
 
 Some of the lessons came from small bugs, others from big architectural decisions — but all of them helped me level up as a Flutter developer. 💪🚀
 
